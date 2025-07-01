@@ -1,0 +1,39 @@
+# Node.js
+node_modules/
+
+# Next.js build output
+.next/
+out/
+dist/
+
+# Environment variables (секреты!)
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+*.log
+
+# IDE / редакторы
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+
+# Prisma: 
+prisma/migrations/**/migration_lock.toml
+
+# Coverage
+coverage/
+lcov-report/
+
+# Docker: 
+docker-compose.override.yml
+
+
+.cache/

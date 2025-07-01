@@ -1,0 +1,41 @@
+type User {
+  id: ID!
+  username: String!
+  email: String!
+}
+
+type Test {
+  id: ID!
+  title: String!
+  description: String!
+  questions: [Question!]!
+}
+
+type Question {
+  id: ID!
+  text: String!
+  options: [Option!]!
+}
+
+type Option {
+  id: ID!
+  text: String!
+  isCorrect: Boolean!
+}
+
+type Result {
+  id: ID!
+  score: Int!
+}
+
+type Query {
+  tests: [Test!]!
+  test(id: ID!): Test
+  me: User
+}
+
+type Mutation {
+  register(username: String!, email: String!, password: String!): String! # returns JWT
+  login(email: String!, password: String!): String!
+  submitResult(testId: ID!, score: Int!): Result!
+}
