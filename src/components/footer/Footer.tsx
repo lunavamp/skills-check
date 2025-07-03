@@ -10,17 +10,17 @@ const Footer = () => (
       <Link className="link link-hover" href="#">
         FAQ
       </Link>
-      <Link className="link link-hover" href="#">
+      <Link className="link link-hover" href="/login">
         Log In
       </Link>
-      <Link className="link link-hover" href="#">
+      <Link className="link link-hover" href="/register">
         Sign Up
       </Link>
     </nav>
     <nav>
       <h6 className="footer-title">Tests</h6>
-      <Link className="link link-hover" href="#">
-        About us
+      <Link className="link link-hover" href="/tests/cmcl15qv10000v1jkvk187lbc">
+        Start React Assessment
       </Link>
       <Link className="link link-hover" href="#">
         Contact

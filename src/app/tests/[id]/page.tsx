@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useQuery, useMutation, gql } from "@apollo/client";
 
-// GraphQL-запрос для получения теста
 const GET_TEST = gql`
   query GetTest($id: ID!) {
     test(id: $id) {
@@ -23,7 +22,6 @@ const GET_TEST = gql`
   }
 `;
 
-// Мутация для сохранения результата
 const SUBMIT_RESULT = gql`
   mutation SubmitResult($testId: ID!, $score: Int!) {
     submitResult(testId: $testId, score: $score) {
@@ -45,7 +43,6 @@ export default function TestPage() {
   const [score, setScore] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState(30 * 60);
 
-  // Таймер
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((t) => (t > 0 ? t - 1 : 0));
@@ -77,7 +74,7 @@ export default function TestPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-10">
       <h1 className="text-2xl font-bold">{test.title}</h1>
       <p>{test.description}</p>
       <p>Time left: {timeLeft} seconds</p>
@@ -86,7 +83,7 @@ export default function TestPage() {
         <div key={q.id} className="card p-4 shadow">
           <p className="font-semibold mb-2">{q.text}</p>
           {q.options.map((o: any) => (
-            <label key={o.id} className="flex items-center space-x-2">
+            <label key={o.id} className="flex items-center space-x-2 ">
               <input
                 type="radio"
                 name={q.id}

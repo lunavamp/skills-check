@@ -2,8 +2,8 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 
 /**
- * Хук таймера, считает время в секундах.
- * @param initialSeconds - начальное количество секунд
+ *
+ * @param initialSeconds
  * @returns { timeLeft, start, stop, reset }
  */
 export default function useTimer(initialSeconds: number) {
@@ -39,7 +39,6 @@ export default function useTimer(initialSeconds: number) {
     setTimeLeft(initialSeconds);
   }, [initialSeconds, stop]);
 
-  // Очистка при размонтировании
   useEffect(() => {
     return () => stop();
   }, [stop]);

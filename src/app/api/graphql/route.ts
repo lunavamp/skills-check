@@ -1,31 +1,24 @@
-import { ApolloServer } from "apollo-server-micro";
 import { NextApiRequest, NextApiResponse } from "next";
-import { resolvers } from "@/graphql/resolvers";
-import { readFileSync } from "fs";
-import { join } from "path";
-
-const typeDefs = readFileSync(
-  join(process.cwd(), "src/graphql/schema.graphql"),
-  "utf8"
-);
-
-const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
+import { createYoga } from "graphql-yoga";
+import { createSchema } from "@/graphql/schemaBuilder";
 
 export const config = {
-  api: {
-    bodyParser: false,
-  },
+  api: { bodyParser: false },
 };
 
-const startServer = apolloServer.start();
+const yoga = createYoga<{
+  req: NextApiRequest;
+  res: NextApiResponse;
+}>({
+  schema: createSchema(),
+  graphqlEndpoint: "/api/graphql",
+  graphiql: process.env.NODE_ENV !== "production",
+});
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  await startServer;
-  return apolloServer.createHandler({ path: "/api/graphql" })(req, res);
+export function GET(req: NextApiRequest, res: NextApiResponse) {
+  return yoga(req, res);
+}
+
+export function POST(req: NextApiRequest, res: NextApiResponse) {
+  return yoga(req, res);
 }

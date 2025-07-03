@@ -6,7 +6,7 @@ node_modules/
 out/
 dist/
 
-# Environment variables (секреты!)
+# Environment variables 
 .env
 .env.local
 .env.*.local
@@ -16,7 +16,7 @@ npm-debug.log*
 yarn-debug.log*
 *.log
 
-# IDE / редакторы
+# IDE 
 .vscode/
 .idea/
 .DS_Store

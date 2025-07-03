@@ -9,7 +9,7 @@ interface Context {
   req: NextApiRequest;
 }
 
-// Вытягиваем userId из Authorization-заголовка
+// userId Authorizationа
 function getUserId(context: Context): string {
   const authHeader = context.req.headers.authorization;
   if (!authHeader) {
@@ -27,21 +27,20 @@ function getUserId(context: Context): string {
 
 export const resolvers = {
   Query: {
-    // Список всех тестов (без вопросов)
+
     tests: () => prisma.test.findMany(),
 
-    // Один тест по ID (с базовым описанием)
+
     test: (_parent: any, args: { id: string }) =>
       prisma.test.findUnique({ where: { id: args.id } }),
 
-    // "Профиль" текущего пользователя
     me: (_parent: any, _args: any, context: Context) => {
       const userId = getUserId(context);
       return prisma.user.findUnique({ where: { id: userId } });
     },
   },
 
-  // Разрешаем вложенные поля в Test
+
   Test: {
     questions: (parent: { id: string }) =>
       prisma.question.findMany({
@@ -50,14 +49,14 @@ export const resolvers = {
       }),
   },
 
-  // Разрешаем вложенные поля в Question
+
   Question: {
     options: (parent: { id: string }) =>
       prisma.option.findMany({ where: { questionId: parent.id } }),
   },
 
   Mutation: {
-    // Регистрация нового пользователя: сохраняем, возвращаем JWT
+   
     register: async (
       _parent: any,
       args: { username: string; email: string; password: string }
@@ -75,7 +74,7 @@ export const resolvers = {
       });
     },
 
-    // Логин: проверяем пароль, возвращаем JWT
+
     login: async (_parent: any, args: { email: string; password: string }) => {
       const user = await prisma.user.findUnique({
         where: { email: args.email },
@@ -92,7 +91,7 @@ export const resolvers = {
       });
     },
 
-    // Сохранение результата теста. Требует авторизации.
+    
     submitResult: (
       _parent: any,
       args: { testId: string; score: number },
